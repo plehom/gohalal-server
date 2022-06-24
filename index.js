@@ -5,8 +5,9 @@ const path = require("path")
 const mongoose = require("mongoose")
 
 const userRoute = require("./routes/auth")
-const productsRoute = require("./routes/products")
+///const productsRoute = require("./routes/products")
 const discountRoute = require("./routes/discount")
+const newsLetterRoute = require("./routes/newsletter")
 
 const app = express()
 
@@ -25,7 +26,15 @@ app.use(express.json())
 app.use(express.urlencoded())
 
 app.use('/api/auth',userRoute)
-app.use('/api/products',productsRoute)
+//app.use('/api/products',productsRoute)
 app.use('/api/discount',discountRoute)
+app.use('/api/newsletter',newsLetterRoute)
 
 app.listen(PORT,()=> console.log(`Server running on port ${PORT}`))
+
+
+/*
+curl --request GET \
+--url 'https://us18.api.mailchimp.com/3.0/' \
+--user 'anystring:7fdd7033ec7bfb324a4d4efe141eba78-us18
+*/
