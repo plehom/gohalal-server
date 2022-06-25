@@ -8,6 +8,8 @@ const userRoute = require("./routes/auth")
 ///const productsRoute = require("./routes/products")
 const discountRoute = require("./routes/discount")
 const newsLetterRoute = require("./routes/newsletter")
+const preorderRoute = require("./routes/preorder")
+const contactRoute = require("./routes/contact")
 
 const app = express()
 
@@ -29,6 +31,8 @@ app.use('/api/auth',userRoute)
 //app.use('/api/products',productsRoute)
 app.use('/api/discount',discountRoute)
 app.use('/api/newsletter',newsLetterRoute)
+app.use('/api/preorder',preorderRoute)
+app.use('/api/contact',contactRoute)
 
 app.listen(PORT,()=> console.log(`Server running on port ${PORT}`))
 
