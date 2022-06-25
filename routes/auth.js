@@ -13,7 +13,7 @@ router.post('/register', async (req,res)=>{
     const {username, email, password : ps} = req.body
     const password = await bcrypt.hash(ps,7)
     
-    try{
+    
         const email_exists = await User.findOne({
             email : email
         })
@@ -21,26 +21,25 @@ router.post('/register', async (req,res)=>{
             username : username
         })
         console.log(username_exists)
-        if(!email_exists && !username_exists){
+        console.log(email_exists)
+        if(email_exists==null && username_exists==null){
             const user = await User.create({
                 username,
                 email,
                 password
             })
             const token = jwt.sign(
-                {user_id:user._id,email,isAdmin},
+                {user_id:user._id,email},
                 process.env.JWT_SEC,
                 {expiresIn:"2h"}
             )
             user.token = token
 
-            res.json(user)
+            res.json(token)
         }else{
-            res.json({status :"error",msg:"User with email / password already exists !"})
+            res.json({status :"error",msg:"User with email / username already exists !"})
         }
-    }catch(err){
-        res.json({status:"error"})
-    }
+    
 })
 router.post('/login', async (req,res)=>{
     const {username,password} = req.body

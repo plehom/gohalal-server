@@ -1,6 +1,7 @@
 const request = require ("request")
 const express = require("express")
 const Newsletter = require("../models/newsletter.model")
+const mongoose = require("mongoose")
 
 const router = express.Router()
 
@@ -29,11 +30,19 @@ router.post('/subscribe',(req,res)=>{
 
 router.post("/savetodb",async (req,res)=>{
     const {email} = req.body
-    try{
-        const response = await Newsletter.save({email})
-    }catch(err){
-        res.json({status:"error",error:err})
-    }
+  
+        const response = await Newsletter.create({email})
+        res.json({status:"ok"})
+    
+})
+
+router.get("/get",async(req,res)=>{
+  try{
+    const response = await Newsletter.find()
+    res.json({response:response})
+  }catch(err){
+    res.json({status:"error"})
+  }
 })
 
 module.exports = router
