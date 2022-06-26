@@ -3,6 +3,9 @@ require('dotenv').config()
 const express = require("express")
 const path = require("path")
 const mongoose = require("mongoose")
+const cors = require("cors")
+
+
 
 const userRoute = require("./routes/auth")
 ///const productsRoute = require("./routes/products")
@@ -12,6 +15,8 @@ const preorderRoute = require("./routes/preorder")
 const contactRoute = require("./routes/contact")
 
 const app = express()
+
+app.use(cors())
 
 const PORT = process.env.PORT
 
